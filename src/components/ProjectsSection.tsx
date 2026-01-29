@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FolderOpen, TrendingUp, Database, BarChart3, LineChart } from "lucide-react";
+import { TrendingUp, Database, BarChart3, LineChart, ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
@@ -7,7 +7,7 @@ const projects = [
     subtitle: "Cost-Benefit Analysis",
     period: "Nov 2023 – Jan 2024",
     icon: BarChart3,
-    color: "from-emerald-500 to-teal-600",
+    gradient: "from-emerald-500 via-teal-500 to-cyan-500",
     highlights: [
       { metric: "10,000+", label: "Utility records validated" },
       { metric: "$15.4M", label: "Potential savings identified" },
@@ -21,7 +21,7 @@ const projects = [
     subtitle: "Loan Default Prediction",
     period: "Jan 2026 – Feb 2026",
     icon: Database,
-    color: "from-blue-500 to-indigo-600",
+    gradient: "from-blue-500 via-indigo-500 to-violet-500",
     highlights: [
       { metric: "50%", label: "Prep time reduced" },
       { metric: "2x", label: "Higher default rate identified" },
@@ -35,7 +35,7 @@ const projects = [
     subtitle: "Healthcare Analytics",
     period: "Jan 2026 – Feb 2026",
     icon: LineChart,
-    color: "from-purple-500 to-pink-600",
+    gradient: "from-purple-500 via-pink-500 to-rose-500",
     highlights: [
       { metric: "300,000+", label: "Hospital encounters analyzed" },
       { metric: "Top 3", label: "Segments prioritized" },
@@ -49,7 +49,7 @@ const projects = [
     subtitle: "10-Year Trends",
     period: "Nov 2025 – Dec 2025",
     icon: TrendingUp,
-    color: "from-orange-500 to-red-600",
+    gradient: "from-orange-500 via-amber-500 to-yellow-500",
     highlights: [
       { metric: "10 Years", label: "Data standardized" },
       { metric: "30%", label: "Reporting time reduced" },
@@ -62,62 +62,80 @@ const projects = [
 
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="relative py-24 bg-secondary/30">
-      <div className="section-container">
+    <section id="projects" className="relative py-32 bg-gradient-to-b from-transparent via-secondary/30 to-transparent">
+      {/* Background effect */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(260_80%_60%/0.05),transparent_60%)]" />
+
+      <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-16"
         >
-          <h2 className="text-sm font-medium text-primary mb-3 tracking-wider uppercase">Projects</h2>
-          <h3 className="text-3xl md:text-4xl font-bold">Featured Work</h3>
+          <h2 className="section-label mb-4">Projects</h2>
+          <h3 className="section-title">Featured Work</h3>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-card rounded-2xl overflow-hidden group hover:border-primary/30 transition-all duration-300"
+              transition={{ duration: 0.6, delay: index * 0.15, ease: [0.4, 0, 0.2, 1] }}
+              className="glass-card rounded-3xl overflow-hidden group hover:border-primary/30 transition-all duration-500"
             >
               {/* Header with gradient */}
-              <div className={`p-6 bg-gradient-to-r ${project.color} relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-black/20" />
+              <div className={`p-8 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
+                <div className="absolute inset-0 bg-black/30" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                
                 <div className="relative z-10 flex items-start justify-between">
                   <div>
-                    <h4 className="text-xl font-bold text-white mb-1">{project.title}</h4>
-                    <p className="text-white/80 text-sm">{project.subtitle}</p>
+                    <h4 className="text-2xl font-bold text-white mb-1">{project.title}</h4>
+                    <p className="text-white/80 font-medium">{project.subtitle}</p>
                   </div>
-                  <project.icon className="w-8 h-8 text-white/80" />
+                  <motion.div
+                    className="p-3 rounded-2xl bg-white/10 backdrop-blur-sm text-white"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    <project.icon className="w-7 h-7" />
+                  </motion.div>
                 </div>
-                <p className="relative z-10 text-white/70 text-sm mt-3">{project.period}</p>
+                <p className="relative z-10 text-white/70 text-sm mt-4 font-medium">{project.period}</p>
               </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="p-8">
                 {/* Metrics */}
-                <div className="grid grid-cols-3 gap-4 mb-6">
+                <div className="grid grid-cols-3 gap-4 mb-8">
                   {project.highlights.map((highlight, i) => (
-                    <div key={i} className="text-center">
-                      <p className="text-xl font-bold gradient-text">{highlight.metric}</p>
-                      <p className="text-xs text-muted-foreground">{highlight.label}</p>
-                    </div>
+                    <motion.div 
+                      key={i} 
+                      className="text-center"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 + i * 0.1 }}
+                    >
+                      <p className="text-2xl font-bold gradient-text">{highlight.metric}</p>
+                      <p className="text-xs text-muted-foreground mt-1">{highlight.label}</p>
+                    </motion.div>
                   ))}
                 </div>
 
-                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                   {project.description}
                 </p>
 
                 {/* Tools */}
                 <div className="flex flex-wrap gap-2">
                   {project.tools.map((tool) => (
-                    <span key={tool} className="skill-badge text-xs">
+                    <span key={tool} className="skill-badge text-sm">
                       {tool}
                     </span>
                   ))}
