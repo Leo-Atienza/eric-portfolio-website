@@ -105,14 +105,11 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Enable GPU acceleration for transforms and animations */
-  .glass-card,
-  .skill-badge,
+  /* GPU acceleration only for elements that animate on hover */
   .btn-premium,
   .btn-glass,
   .contact-card {
     will-change: transform;
-    transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
@@ -146,8 +143,8 @@
 @layer components {
   .glass-card {
     background: var(--glass-bg);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
     border: 1px solid var(--glass-border);
     box-shadow: var(--shadow-card);
     position: relative;

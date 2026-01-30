@@ -73,17 +73,13 @@ const SkillsSection = () => {
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, index) => (
-                  <motion.span 
-                    key={skill} 
+                {category.skills.map((skill) => (
+                  <span
+                    key={skill}
                     className="skill-badge text-sm"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: categoryIndex * 0.1 + index * 0.05 }}
                   >
                     {skill}
-                  </motion.span>
+                  </span>
                 ))}
               </div>
             </motion.div>

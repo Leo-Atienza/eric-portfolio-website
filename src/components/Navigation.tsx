@@ -17,20 +17,27 @@ const Navigation = () => {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
 
-      // Update active section based on scroll position
-      const sections = navItems.map(item => item.href.substring(1));
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
-        if (element && window.scrollY >= element.offsetTop - 200) {
-          setActiveSection(section);
-          break;
-        }
+          // Update active section based on scroll position
+          const sections = navItems.map(item => item.href.substring(1));
+          for (const section of sections.reverse()) {
+            const element = document.getElementById(section);
+            if (element && window.scrollY >= element.offsetTop - 200) {
+              setActiveSection(section);
+              break;
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -41,8 +48,8 @@ const Navigation = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? "glass-card border-b border-border/30 shadow-lg" 
+          isScrolled
+            ? "bg-background/80 backdrop-blur-md border-b border-border/30 shadow-lg"
             : "bg-transparent"
         }`}
       >

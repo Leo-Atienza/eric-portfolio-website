@@ -9,37 +9,22 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(260_80%_60%/0.08),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,hsl(280_70%_60%/0.05),transparent_40%)]" />
       
-      {/* Floating Orbs */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-30"
+      {/* Floating Orbs - using CSS animations for GPU compositing */}
+      <div
+        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-30 animate-float"
         style={{
           background: 'radial-gradient(circle, hsl(217 91% 60% / 0.15) 0%, transparent 70%)',
           filter: 'blur(60px)',
-        }}
-        animate={{
-          x: [0, 50, 0],
-          y: [0, -30, 0],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
+          willChange: 'transform',
         }}
       />
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-20"
+      <div
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-20 animate-float"
         style={{
           background: 'radial-gradient(circle, hsl(260 80% 60% / 0.2) 0%, transparent 70%)',
           filter: 'blur(50px)',
-        }}
-        animate={{
-          x: [0, -40, 0],
-          y: [0, 40, 0],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "easeInOut",
+          willChange: 'transform',
+          animationDelay: '-3s',
         }}
       />
       

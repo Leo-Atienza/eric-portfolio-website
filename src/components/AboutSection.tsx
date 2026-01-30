@@ -87,17 +87,13 @@ const AboutSection = () => {
               <h4 className="text-2xl font-bold">Relevant Coursework</h4>
             </div>
             <div className="flex flex-wrap gap-3">
-              {coursework.map((course, index) => (
-                <motion.span
+              {coursework.map((course) => (
+                <span
                   key={course}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.1 * index, ease: [0.4, 0, 0.2, 1] }}
                   className="skill-badge text-base"
                 >
                   {course}
-                </motion.span>
+                </span>
               ))}
             </div>
           </motion.div>
