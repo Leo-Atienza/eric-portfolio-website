@@ -62,7 +62,7 @@ const projects = [
 
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="relative py-32 bg-gradient-to-b from-transparent via-secondary/30 to-transparent">
+    <section id="projects" className="relative py-20 sm:py-32 bg-gradient-to-b from-transparent via-secondary/30 to-transparent">
       {/* Background effect */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(260_80%_60%/0.05),transparent_60%)]" />
 
@@ -72,14 +72,14 @@ const ProjectsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <h2 className="section-label mb-4">Projects</h2>
           <h3 className="section-title">Featured Work</h3>
         </motion.div>
 
         <motion.div 
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 gap-5 sm:gap-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
@@ -107,7 +107,7 @@ const ProjectsSection = () => {
                   }
                 },
               }}
-              className="glass-card rounded-3xl overflow-hidden group hover:border-primary/30"
+              className="glass-card rounded-2xl sm:rounded-3xl overflow-hidden group hover:border-primary/30"
             >
               {/* Header with gradient */}
               <div className={`p-6 sm:p-8 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>

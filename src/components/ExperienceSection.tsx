@@ -40,7 +40,7 @@ const experiences = [
 
 const ExperienceSection = () => {
   return (
-    <section id="experience" className="relative py-32 overflow-hidden">
+    <section id="experience" className="relative py-20 sm:py-32 overflow-hidden">
       {/* Background effect */}
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] opacity-20"
         style={{
@@ -55,7 +55,7 @@ const ExperienceSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="mb-16"
+          className="mb-10 sm:mb-16"
         >
           <h2 className="section-label mb-4">Experience</h2>
           <h3 className="section-title">Work History</h3>

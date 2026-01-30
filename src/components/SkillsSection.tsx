@@ -36,7 +36,7 @@ const skillCategories = [
 
 const SkillsSection = () => {
   return (
-    <section id="skills" className="relative py-32 bg-gradient-to-b from-secondary/30 to-transparent">
+    <section id="skills" className="relative py-20 sm:py-32 bg-gradient-to-b from-secondary/30 to-transparent">
       {/* Background effect */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(217_91%_60%/0.05),transparent_70%)]" />
       
@@ -46,13 +46,13 @@ const SkillsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <h2 className="section-label mb-4">Skills</h2>
           <h3 className="section-title">Technical & Professional Expertise</h3>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
@@ -60,16 +60,16 @@ const SkillsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: categoryIndex * 0.1, ease: [0.4, 0, 0.2, 1] }}
-              className="glass-card rounded-3xl p-7 hover:border-primary/30 transition-all duration-500 group"
+              className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-7 hover:border-primary/30 transition-all duration-500 group"
             >
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                 <motion.div 
                   className={`p-3 rounded-2xl bg-gradient-to-br ${category.gradient} text-white shadow-lg group-hover:scale-110 transition-transform duration-500`}
                   whileHover={{ rotate: 5 }}
                 >
                   <category.icon className="w-6 h-6" />
                 </motion.div>
-                <h4 className="text-xl font-bold">{category.title}</h4>
+                <h4 className="text-lg sm:text-xl font-bold">{category.title}</h4>
               </div>
 
               <div className="flex flex-wrap gap-2">
