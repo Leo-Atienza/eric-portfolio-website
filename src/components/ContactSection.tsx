@@ -70,13 +70,8 @@ const ContactSection = () => {
           <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-8 space-y-3 sm:space-y-4">
             {contactLinks.map((item, index) => {
               const content = (
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="contact-card group"
-                >
+                <div className="contact-card group">
+
                   <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 text-primary group-hover:from-primary group-hover:to-primary group-hover:text-primary-foreground transition-all duration-500">
                     <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
@@ -87,7 +82,7 @@ const ContactSection = () => {
                   {item.isLink && (
                     <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
                   )}
-                </motion.div>
+                </div>
               );
 
               if (item.isLink) {

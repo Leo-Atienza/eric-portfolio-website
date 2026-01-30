@@ -16,6 +16,7 @@ const HeroSection = () => {
           background: 'radial-gradient(circle, hsl(217 91% 60% / 0.15) 0%, transparent 70%)',
           filter: 'blur(60px)',
           willChange: 'transform',
+          contain: 'strict',
         }}
       />
       <div
@@ -24,6 +25,7 @@ const HeroSection = () => {
           background: 'radial-gradient(circle, hsl(260 80% 60% / 0.2) 0%, transparent 70%)',
           filter: 'blur(50px)',
           willChange: 'transform',
+          contain: 'strict',
           animationDelay: '-3s',
         }}
       />
