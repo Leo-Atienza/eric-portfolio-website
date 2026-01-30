@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+
+const sectionIds = ["about", "skills", "experience", "projects", "certifications", "contact"];
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -15,23 +17,15 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const activeSectionRef = useRef("");
 
+  // Lightweight scroll listener - only checks scrollY for nav background
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
           setIsScrolled(window.scrollY > 50);
-
-          // Update active section based on scroll position
-          const sections = navItems.map(item => item.href.substring(1));
-          for (const section of sections.reverse()) {
-            const element = document.getElementById(section);
-            if (element && window.scrollY >= element.offsetTop - 200) {
-              setActiveSection(section);
-              break;
-            }
-          }
           ticking = false;
         });
         ticking = true;
@@ -41,13 +35,39 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Use IntersectionObserver for active section tracking (no scroll DOM queries)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            if (activeSectionRef.current !== id) {
+              activeSectionRef.current = id;
+              setActiveSection(id);
+            }
+          }
+        }
+      },
+      { rootMargin: "-20% 0px -75% 0px" }
+    );
+
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        style={{ willChange: 'backdrop-filter, background-color', contain: 'layout style' }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors transition-shadow duration-300 ${
           isScrolled
             ? "bg-background/80 backdrop-blur-md border-b border-border/30 shadow-lg"
             : "bg-transparent"

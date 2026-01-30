@@ -102,6 +102,12 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  /* Off-screen sections skip rendering until near viewport */
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+  }
+
   /* Performance optimizations for smoother animations */
   * {
     -webkit-tap-highlight-color: transparent;
@@ -152,6 +158,7 @@
     position: relative;
     overflow: hidden;
     transform: translateZ(0);
+    contain: content;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
                 box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
                 border-color 0.4s ease;
@@ -200,6 +207,7 @@
 
   .section-container {
     @apply max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-24;
+    contain: layout style;
   }
 
   .skill-badge {
@@ -385,10 +393,10 @@
 
 @keyframes glow {
   from {
-    box-shadow: 0 0 30px hsl(217 91% 60% / 0.2), 0 0 60px hsl(260 80% 60% / 0.1);
+    opacity: 0.7;
   }
   to {
-    box-shadow: 0 0 50px hsl(217 91% 60% / 0.4), 0 0 100px hsl(260 80% 60% / 0.2);
+    opacity: 1;
   }
 }
 

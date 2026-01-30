@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { TrendingUp, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 const experiences = [
   {
@@ -104,17 +104,13 @@ const ExperienceSection = () => {
 
                   <ul className="space-y-3 sm:space-y-4">
                     {exp.achievements.map((achievement, i) => (
-                      <motion.li 
-                        key={i} 
+                      <li
+                        key={i}
                         className="flex items-start gap-3 sm:gap-4 text-muted-foreground group/item"
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 + i * 0.1 }}
                       >
                         <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-primary mt-0.5 flex-shrink-0 group-hover/item:scale-110 transition-transform" />
                         <span className="leading-relaxed text-sm sm:text-base">{achievement}</span>
-                      </motion.li>
+                      </li>
                     ))}
                   </ul>
                 </div>
